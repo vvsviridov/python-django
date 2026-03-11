@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from shopapp.models import Order, Product
+from shopapp.models import Order
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -11,6 +11,8 @@ class Command(BaseCommand):
             delivery_address="Lenina St. 123",
             defaults={"promocode": "SALE"}
         )
-        
-        self.stdout.write(self.style.SUCCESS(f"Order for {user.username} "
-                          f"{'created' if created else 'updated'} {order}"))
+
+        self.stdout.write(
+            self.style.SUCCESS(f"Order for {user.username} "
+                               f"{'created' if created else 'updated'} {order}")
+        )
