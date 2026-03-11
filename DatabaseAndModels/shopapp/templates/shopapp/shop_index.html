@@ -6,8 +6,8 @@
 
 {% block body %}
   <h1>Shop App Header</h1>
-  {% for item in data %}
-    <ul>
+  <ul>
+    {% for item in data %}
       <li>
         <h3>
           {{ item.title|capfirst }}
@@ -22,8 +22,8 @@
           {% endif %}
         </p>
       </li>
-      {% empty %}
+    {% empty %}
       <li>List is empty</li>
-    </ul>
-  {% endfor %}
+    {% endfor %}
+  </ul>
 {% endblock %}
