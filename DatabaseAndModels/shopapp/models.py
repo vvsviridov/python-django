@@ -14,8 +14,14 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     archived = models.BooleanField(default=True)
 
+    @property
+    def description_short(self) -> str:
+        if len(self.description) < 48:
+            return self.description
+        return self.description[:48] + '...'
+
     def __str__(self):
-        return self.name
+        return f'Product({self.pk}, {self.name})'
 
 
 class Order(models.Model):
@@ -26,4 +32,4 @@ class Order(models.Model):
     products = models.ManyToManyField(Product, related_name='orders')
 
     def __str__(self):
-        return f'Order #{self.id} by {self.user}'
+        return f'Order #{self.pk} by {self.user}'
