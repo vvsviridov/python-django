@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Base Title
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <header>
+      <a href="/shop/">Home</a>
+      <a href="/shop/products/">Products</a>
+      <a href="/shop/orders/">Orders</a>
+    </header>
+    {% block body %}
+      Base Body
+    {% endblock %}
+    <div>
+      Today is {% now 'l Y-m-d H:i' %}
+    </div>
+  </body>
+</html>
