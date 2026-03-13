@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Product(models.Model):
@@ -9,8 +10,20 @@ class Product(models.Model):
 
     name = models.CharField(max_length=255)
     description = models.TextField(null=False, blank=True)
-    price = models.DecimalField(default=0, max_digits=10, decimal_places=2)
-    discount = models.PositiveSmallIntegerField(default=0)
+    price = models.DecimalField(
+        default=0,
+        max_digits=10,
+        decimal_places=2,
+        validators=[
+            MinValueValidator(0),  # Цена не может быть отрицательной
+        ],
+    )
+    discount = models.PositiveSmallIntegerField(
+        default=0,
+        validators=[
+            MaxValueValidator(100),  # Скидка не может быть больше 100%
+        ],
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     archived = models.BooleanField(default=True)
 
