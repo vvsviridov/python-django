@@ -17,13 +17,15 @@ def process_get_view(request: HttpRequest) -> HttpResponse:
 
 
 def user_bio_view(request: HttpRequest) -> HttpResponse:
-    context = {}
-    return render(request, 'requestdataapp/user-bio-form.html', context)
+    return render(request, 'requestdataapp/user-bio-form.html')
 
 
 def upload_file_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST' and request.FILES.get('file'):
         myfile = request.FILES['file']
+        allowed_size = 1 * 1024 * 1024  # 1MB
+        if myfile.size > allowed_size:
+            return HttpResponse(f'File "{myfile.name}" too big!')
         storage_path = settings.BASE_DIR / "uploads"
         fs = FileSystemStorage(location=str(storage_path))
         file_name = fs.save(myfile.name, myfile)

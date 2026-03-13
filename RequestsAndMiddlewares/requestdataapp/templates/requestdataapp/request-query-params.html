@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
-<h1>Hello mister, {% firstof  request.GET.name|capfirst 'User' %}</h1>
-<pre>
-  a = '{{ a }}'
-  b = '{{ b }}'
-  result = '{{ result }}'
-</pre>
+  <h1>Hello mister,{% firstof request.GET.name|capfirst 'User' %}</h1>
+  <pre>
+    a = '{{ a }}'
+    b = '{{ b }}'
+    result = '{{ result }}'
+  </pre>
 {% endblock %}

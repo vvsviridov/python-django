@@ -53,7 +53,6 @@ MIDDLEWARE = [
 
     'requestdataapp.middlewares.get_useragent_on_request_middleware',
     'requestdataapp.middlewares.CountRequestsMiddleware',
-    'requestdataapp.middlewares.UploadFileSizeValidator',
     'requestdataapp.middlewares.ThrottlingValidator',
 ]
 
