@@ -1,4 +1,4 @@
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponseBadRequest
 from datetime import datetime
 
 
@@ -44,7 +44,7 @@ class ThrottlingValidator:
             self.user_counter[user_ip] += 1
             if self.user_counter[user_ip] > 5:
                 if (datetime.now() - self.user_last_active[user_ip]).seconds < 10:
-                    return HttpResponse(f'Too many requests!')
+                    return HttpResponseBadRequest(f'Too many requests!')
                 else:
                     self.user_counter[user_ip] = 1
         else:

@@ -122,3 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+# User Settings
+
+MAX_FILE_SIZE_MB = 1
+ALLOWED_MIME_TYPES = ['image/jpeg', 'application/pdf']
+MEDIA_ROOT = BASE_DIR / "uploads"
