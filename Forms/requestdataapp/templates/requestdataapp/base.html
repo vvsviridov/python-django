@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Base Title
+      {% endblock %}
+    </title>
+  </head>
+  <header>
+    <a href="/req/get/">Home</a>
+    <a href="/req/bio/">Bio</a>
+    <a href="/req/upload/">Upload</a>
+  </header>
+  <body>
+    {% block body %}
+      Base Body
+    {% endblock %}
+  </body>
+  <br />
+  {# <div>User agent: {{ request.user_agent }}</div> #}
+</html>
