@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>Дмитрий Алексеев — Frontend-разработчик</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css" >
+    <link rel="stylesheet" href="css/style.css" >
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <!-- Popup Form -->
+    <div class="popup-container">
+      <form class="popup">
+        <input type="text" placeholder="Имя" required>
+        <input type="email" placeholder="Email" required>
+        <button type="submit" class="btn btn--primary frm-btn">Отправить</button>
+      </form>
+    </div>
+
+    <!-- Header -->
+    <header class="header container">
+      <nav class="nav">
+        <ul class="nav__list">
+          <li><a href="#" class="nav__link">Услуги</a></li>
+          <li><a href="#" class="nav__link">Портфолио</a></li>
+          <li><a href="#" class="nav__link">Стоимость</a></li>
+        </ul>
+      </nav>
+      <div class="header__contacts">
+        <a href="tel:+74999955577" class="phone">+7 (499) 995-55-77</a>
+        <button class="btn btn--outline open-popup">Заказать звонок</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero container">
+        <div class="hero__content">
+          <h1 class="hero__title">Дмитрий Алексеев</h1>
+          <h2 class="hero__subtitle">Frontend-разработчик и веб-верстальщик</h2>
+          <button class="btn btn--primary open-popup">Узнать больше</button>
+        </div>
+        <div class="hero__image-wrapper">
+          <img
+            src="img/avatar.png"
+            alt="Дмитрий Алексеев"
+            class="hero__avatar"
+          >
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section class="services container">
+        <h2 class="section-title">Что я делаю</h2>
+        <div class="services__grid">
+          <div class="service-card">
+            <img
+              src="img/1.png"
+              alt="Вёрстка лендинг-страниц и сайтов любой сложности"
+              class="service__avatar"
+            >
+            <p class="service-card__text">
+              Вёрстка лендинг-страниц и сайтов любой сложности
+            </p>
+          </div>
+          <div class="service-card">
+            <img
+              src="img/2.png"
+              alt="Адаптивная вёрстка под все браузеры и устройства"
+              class="service__avatar"
+            >
+            <p class="service-card__text">
+              Адаптивная вёрстка под все браузеры и устройства
+            </p>
+          </div>
+          <div class="service-card">
+            <img
+              src="img/3.png"
+              alt="Fronend-разработка и программирование"
+              class="service__avatar"
+            >
+            <p class="service-card__text">
+              Fronend-разработка и программирование
+            </p>
+          </div>
+          <div class="service-card">
+            <img
+              src="img/4.png"
+              alt="Исправление и доработка существующей вёрстки"
+              class="service__avatar"
+            >
+            <p class="service-card__text">
+              Исправление и доработка существующей вёрстки
+            </p>
+          </div>
+        </div>
+        <button class="btn btn--outline open-popup">Узнать стоимость</button>
+      </section>
+
+      <!-- Portfolio Section -->
+      <section class="portfolio container">
+        <h2 class="section-title">Примеры работ</h2>
+        <div class="portfolio__grid">
+          <div class="work-card">
+            <div class="work-card__thumb color-yellow">
+              <img
+                src="img/e1.png"
+                alt="Исправление и доработка существующей вёрстки"
+                class="portfolio__avatar"
+              >
+            </div>
+            <p class="work-card__title">Сайт психолога Веры Антоновой</p>
+          </div>
+          <div class="work-card">
+            <div class="work-card__thumb color-cyan">
+              <img
+                src="img/e2.png"
+                alt="Исправление и доработка существующей вёрстки"
+                class="portfolio__avatar"
+              >
+            </div>
+            <p class="work-card__title">Сайт магазина детской одежды</p>
+          </div>
+          <div class="work-card">
+            <div class="work-card__thumb color-pink">
+              <img
+                src="img/e3.png"
+                alt="Исправление и доработка существующей вёрстки"
+                class="portfolio__avatar"
+              >
+            </div>
+            <p class="work-card__title">Сайт магазина «Рыболов»</p>
+          </div>
+        </div>
+        <button class="btn btn--outline open-popup">Заказать проект</button>
+      </section>
+
+      <!-- Banner Section -->
+      <section class="banner">
+        <div class="container">
+          <h2 class="banner__title">
+            Адаптивная вёрстка под все устройства и браузеры от 1000 ₽ всего за
+            4 часа.*
+          </h2>
+          <p class="banner__note">
+            * Срок и стоимость могут отличаться от заявленных и рассчитываются
+            индивидуально, в зависимотсти от сложности задач.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      <nav class="footer__nav">
+        <a href="#" class="footer__link">Услуги</a>
+        <a href="#" class="footer__link">Портфолио</a>
+        <a href="#" class="footer__link">Стоимость</a>
+      </nav>
+      <div class="footer__contacts">
+        <a href="mailto:dmitry@alekseev.com">dmitry@alekseev.com</a>
+        <a href="tel:+74999957755">+7 (499) 995 77 55</a>
+      </div>
+      <div class="footer__socials">
+        <button class="btn btn--outline open-popup">Заказать звонок</button>
+        <ul class="social__icons">
+          <li>
+            <a href="https://facebook.com" target="_blank"
+              ><i class="fa fa-lg fa-facebook-f"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://vk.com" target="_blank"
+              ><i class="fa fa-lg fa-vk"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://youtube.com" target="_blank"
+              ><i class="fa fa-lg fa-youtube"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://t.me" target="_blank"
+              ><i class="fa fa-lg fa-telegram"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://instagram.com" target="_blank"
+              ><i class="fa fa-lg fa-instagram"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
