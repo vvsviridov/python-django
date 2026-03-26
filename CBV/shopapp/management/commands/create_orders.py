@@ -11,12 +11,16 @@ class Command(BaseCommand):
             delivery_address="Lenina St. 123",
             defaults={"promocode": "SALE"}
         )
+        self.stdout.write(
+            self.style.SUCCESS(f"Order for {user.username} "
+                               f"{'created' if created else 'updated'} {order}")
+        )
+
         order, created = Order.objects.get_or_create(
             user=user,
             delivery_address="Pushkina St. 17-99",
             defaults={"promocode": "LOOSER"}
         )
-
         self.stdout.write(
             self.style.SUCCESS(f"Order for {user.username} "
                                f"{'created' if created else 'updated'} {order}")
