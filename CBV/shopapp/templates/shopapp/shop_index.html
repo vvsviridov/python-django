@@ -1,0 +1,29 @@
+{% extends 'shopapp/base.html' %}
+
+{% block title %}
+  Shop Index Page
+{% endblock %}
+
+{% block body %}
+  <h1>Shop App Header</h1>
+  <ul>
+    {% for item in data %}
+      <li>
+        <h3>
+          {{ item.title|capfirst }}
+          {{ item.body|length }}
+        </h3>
+        <p>
+          {{ item.body }}
+          {% if item.id|divisibleby:2 %}
+            👌
+          {% else %}
+            👍
+          {% endif %}
+        </p>
+      </li>
+    {% empty %}
+      <li>List is empty</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
