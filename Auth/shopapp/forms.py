@@ -1,9 +1,5 @@
 from django import forms
 from django.core import validators
-from django.views.decorators.csrf import requires_csrf_token
-from django.utils.decorators import method_decorator
-
-from django_select2 import forms as s2forms
 
 from .models import Product, Order
 
@@ -24,57 +20,21 @@ from .models import Product, Order
 #     discount = forms.IntegerField()
 
 
-class AuditMixin:
-    """
-    Миксин для автоматического заполнения полей created_by и updated_by.
-    Используется в ModelForm.
-    Требует, чтобы форма получила request через инициализацию.
-    """
-
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        super().__init__(*args, **kwargs)
-
-    def save(self, commit=True):
-        instance = super().save(commit=False)
-        if self.request and self.request.user.is_authenticated:
-            if not instance.pk:
-                instance.created_by = self.request.user
-            instance.updated_by = self.request.user
-        if commit:
-            instance.save()
-            self.save_m2m()
-        return instance
-
-
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'description', 'price', 'discount']
 
 
-class OrderProductsWidget(s2forms.ModelSelect2MultipleWidget):
-    search_fields = ['name', 'description', 'price', 'discount']
-
-
-class OrderForm(AuditMixin, forms.ModelForm):
+class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['delivery_address', 'promocode', 'user', 'products']
-        widgets = {
-            "products": OrderProductsWidget,
-        }
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
         # self.fields['products'].queryset = Product.objects.only('id', 'name')
         self.fields['products'].queryset = Product.objects.filter(archived=False)
-
-    # CSRF защита для AJAX-форм
-    @method_decorator(requires_csrf_token)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
 
 
 # class AuditMixin:

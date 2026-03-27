@@ -9,16 +9,16 @@
       {% endblock %}
     </title>
   </head>
-  <header>
-    <a href="/req/get/">Home</a>
-    <a href="/req/bio/">Bio</a>
-    <a href="/req/upload/">Upload</a>
-  </header>
   <body>
+    <header>
+      <a href="{% url 'myauth:login' %}">Home</a>
+    </header>
     {% block body %}
       Base Body
     {% endblock %}
+    <br>
+    <div>
+      Today is {% now 'l Y-m-d H:i' %}
+    </div>
   </body>
-  <br />
-  {# <div>User agent: {{ request.user_agent }}</div> #}
 </html>

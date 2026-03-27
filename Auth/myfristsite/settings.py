@@ -38,9 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django_select2',
-
     'shopapp.apps.ShopappConfig',
+    'myauth.apps.MyauthConfig',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +125,5 @@ STATIC_URL = 'static/'
 MAX_FILE_SIZE_MB = 1
 ALLOWED_MIME_TYPES = ['image/jpeg', 'application/pdf']
 MEDIA_ROOT = BASE_DIR / "uploads"
+
+LOGIN_REDIRECT_URL = '/admin/'
