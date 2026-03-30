@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Base Title
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <header>
+      {% if user.is_authenticated %}
+        <a href="{% url 'myauth:logout-confirm' %}">Logout</a>
+        <a href="{% url 'shopapp:orders_list' %}">Shop orders</a>
+      {% else %}
+        <a href="{% url 'myauth:register' %}">Register</a>
+        <a href="{% url 'myauth:login' %}">Login</a>
+      {% endif %}
+    </header>
+    {% block body %}
+      Base Body
+    {% endblock %}
+    <br>
+    <div>
+      Today is {% now 'l Y-m-d H:i' %}
+    </div>
+  </body>
+</html>

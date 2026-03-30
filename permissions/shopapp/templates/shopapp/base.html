@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Base Title
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <header>
+      <div>Hello, <a href="{% url 'myauth:about-me' %}">{{ user.username }}</a></div>
+      <br>
+      <a href="{% url 'shopapp:index' %}">Home</a>
+      <a href="{% url 'shopapp:products_list' %}">Products</a>
+      <a href="{% url 'shopapp:orders_list' %}">Orders</a>
+    </header>
+    {% block body %}
+      Base Body
+    {% endblock %}
+    <br>
+    <div>
+      Today is {% now 'l Y-m-d H:i' %}
+    </div>
+  </body>
+</html>
