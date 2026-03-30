@@ -7,11 +7,11 @@
 {% block body %}
   <h1>Update product</h1>
   <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Update</button>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
   </form>
-<div>
-  <a href="{% url 'shopapp:product_details' pk=object.pk %}">Back to product #{{ object.pk }}</a>
-</div>
+  <div>
+    <a href="{% url 'shopapp:product_details' pk=object.pk %}">Back to product #{{ object.pk }}</a>
+  </div>
 {% endblock %}

@@ -1,5 +1,7 @@
 from django.core.management.base import BaseCommand
 from shopapp.models import Product
+from django.contrib.auth.models import User
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -16,7 +18,8 @@ class Command(BaseCommand):
                     'price': item['price'],
                     'discount': item['discount'],
                     'description': 'Auto-generated'
-                }
+                },
+                created_by=User.objects.first()
             )
             status = 'Created' if created else 'Exists'
             self.stdout.write(self.style.SUCCESS(f'{status}: {product.name}'))

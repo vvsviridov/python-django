@@ -56,6 +56,7 @@ class RegisterView(CreateView):
         login(request=self.request, user=user)
         return response
 
+
 class MyLogoutView(TemplateView):
     template_name = 'myauth/logout.html'
     # http_method_names = ["get", "post", "options"]

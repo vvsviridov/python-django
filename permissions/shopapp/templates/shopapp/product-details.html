@@ -10,13 +10,13 @@
   <p>{{ product.price }}</p>
   <p>{{ product.discount }}</p>
   <p>{{ product.description }}</p>
-<div>
-  <a href="{% url 'shopapp:product_update' pk=product.pk  %}">Update product</a>
-</div>
-<div>
-  <a href="{% url 'shopapp:product_delete' pk=product.pk  %}">Archive product</a>
-</div>
-<div>
-  <a href="{% url 'shopapp:products_list' %}">Back to products</a>
-</div>
+  <div>
+    <a href="{% url 'shopapp:product_update' pk=product.pk %}">Update product</a>
+  </div>
+  <div>
+    <a href="{% url 'shopapp:product_delete' pk=product.pk %}">Archive product</a>
+  </div>
+  <div>
+    <a href="{% url 'shopapp:products_list' %}">Back to products</a>
+  </div>
 {% endblock %}

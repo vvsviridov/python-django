@@ -39,7 +39,7 @@ class Product(models.Model):
         return self.description[:48] + '...'
 
     def __str__(self):
-        return f'{self.name} ${self.price} {self.discount}%'
+        return f'{self.name} ${self.price} {self.discount}% by {self.created_by}'
 
 
 class Order(models.Model):

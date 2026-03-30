@@ -54,6 +54,7 @@ class ProductAdmin(admin.ModelAdmin, ExportAsCSVMixin):
         ('Extra options', {
             'fields': (
                 'archived',
+                'created_by',
             ),
             'classes': ('collapse',),
             'description': 'Extra options. Field "archived" is for soft delete'

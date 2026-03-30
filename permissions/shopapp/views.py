@@ -98,7 +98,8 @@ class ProductCreateView(PermissionRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
+    permission_required = 'shopapp.change_product'
     model = Product
     fields = ['name', 'price', 'description', 'discount']
     template_name_suffix = '_update_form'
@@ -108,6 +109,10 @@ class ProductUpdateView(UpdateView):
             'shopapp:product_details',
             kwargs={'pk': self.object.pk}
         )
+    
+    def test_func(self):
+        prod = self.get_object()
+        return prod.created_by == self.request.user
 
 
 class ProductDeleteView(DeleteView):

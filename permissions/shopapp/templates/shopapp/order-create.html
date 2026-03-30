@@ -7,11 +7,11 @@
 {% block body %}
   <h1>Create new order</h1>
   <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Send</button>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send</button>
   </form>
-<div>
-  <a href="{% url 'shopapp:orders_list' %}">Back to orders</a>
-</div>
+  <div>
+    <a href="{% url 'shopapp:orders_list' %}">Back to orders</a>
+  </div>
 {% endblock %}
