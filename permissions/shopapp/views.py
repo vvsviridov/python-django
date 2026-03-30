@@ -112,6 +112,8 @@ class ProductUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView
     
     def test_func(self):
         prod = self.get_object()
+        if self.request.user.is_superuser:
+            return True
         return prod.created_by == self.request.user
 
 
