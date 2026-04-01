@@ -127,16 +127,11 @@ class OrdersListViewTestCase(TestCase):
 
 
 class ProductsExportViewTestCase(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.user = User.objects.create_user(
-            username='test_user', password='password123')
-    
-    @classmethod
-    def tearDownClass(cls):
-        cls.user.delete()
-
     fixtures = ['products-fixture.json']
+
+    def setUp(self):
+        self.user = User.objects.get(pk=1)
+        self.client.force_login(self.user)
 
     def test_get_products_view(self):
         response = self.client.get(reverse('shopapp:products-export'))
@@ -146,8 +141,9 @@ class ProductsExportViewTestCase(TestCase):
             {
                 'pk': p.pk,
                 'name': p.name,
-                'price': p.price,
+                'price': str(p.price),
                 'archived': p.archived,
+                'created_by': p.created_by.pk,
             }
             for p in products
         ]
@@ -156,7 +152,8 @@ class ProductsExportViewTestCase(TestCase):
             products_data['products'],
             expected_data
         )
-
+        print('Response products: ', products_data['products'])
+        print('Expected data: ', expected_data)
 
 class OrderDetailsViewTestCase(TestCase):
     @classmethod
@@ -193,24 +190,12 @@ class OrderDetailsViewTestCase(TestCase):
 
 
 class OrdersExportViewTestCase(TestCase):
-    # @classmethod
-    # def setUpClass(cls):
-    #     cls.user = User.objects.create_user(
-    #         username='test_user', password='password123')
-
-    def setUp(self):
-        self.user = User.objects.create_user(
-            username='test_user', password='password123')
-        self.client.force_login(self.user)
-
-    # @classmethod
-    # def tearDownClass(cls):
-    #     cls.user.delete()
-
-    fixtures = ['orders-fixture.json']
+    fixtures = [
+        'products-fixture.json',
+        'orders-fixture.json',
+    ]
 
     def test_get_orders_view(self):
-        print(f"Количество товаров из фикстуры: {Order.objects.count()}")
         response = self.client.get(reverse('shopapp:orders-export'))
         self.assertEqual(response.status_code, 200)
         orders = Order.objects.order_by('pk').all()
@@ -229,5 +214,5 @@ class OrdersExportViewTestCase(TestCase):
             orders_data['orders'],
             expected_data
         )
-        print(orders_data['orders'])
-        print(expected_data)
+        print('Response orders: ', orders_data['orders'])
+        print('Expected data: ', expected_data)

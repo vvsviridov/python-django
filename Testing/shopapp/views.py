@@ -222,7 +222,7 @@ class ProductDataExportView(View):
                 'name': p.name,
                 'price': str(p.price),
                 'archived': p.archived,
-                'created_by': request.user,
+                'created_by': request.user.pk,
             }
             for p in products
         ]
