@@ -229,7 +229,7 @@ class ProductDataExportView(View):
         return JsonResponse({'products': products_data})
 
 
-class OrderDataExportView(View):
+class OrderDataExportView(UserPassesTestMixin, View):
     def get(self, request: HttpRequest) -> JsonResponse:
         orders = Order.objects.order_by('pk').all()
         orders_data = [
@@ -243,3 +243,6 @@ class OrderDataExportView(View):
             for o in orders
         ]
         return JsonResponse({'orders': orders_data})
+    
+    def test_func(self):
+        return self.request.user.is_staff

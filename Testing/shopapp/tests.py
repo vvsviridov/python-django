@@ -127,8 +127,11 @@ class OrdersListViewTestCase(TestCase):
 
 
 class ProductsExportViewTestCase(TestCase):
-    fixtures = ['products-fixture.json']
-
+    fixtures = [
+        'users-fixture.json',
+        'products-fixture.json',
+        'orders-fixture.json',
+    ]
     def setUp(self):
         self.user = User.objects.get(pk=1)
         self.client.force_login(self.user)
@@ -191,10 +194,15 @@ class OrderDetailsViewTestCase(TestCase):
 
 class OrdersExportViewTestCase(TestCase):
     fixtures = [
+        'users-fixture.json',
         'products-fixture.json',
         'orders-fixture.json',
     ]
 
+    def setUp(self):
+        self.user = User.objects.get(pk=1)
+        self.client.force_login(self.user)
+    
     def test_get_orders_view(self):
         response = self.client.get(reverse('shopapp:orders-export'))
         self.assertEqual(response.status_code, 200)
