@@ -55,7 +55,7 @@ def product_images_dir_path(instance: "ProductImage", filename: str) -> str:
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=product_images_dir_path, null=True, blank=True)
-    description = models.CharField(max_length=200, null=False, blank=True)
+    description = models.CharField(max_length=200, null=True, blank=True)
 
 
 class Order(models.Model):
