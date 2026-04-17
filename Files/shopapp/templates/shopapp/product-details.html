@@ -1,0 +1,36 @@
+{% extends 'shopapp/base.html' %}
+
+{% block title %}
+  Product Details
+{% endblock %}
+
+{% block body %}
+  <h1>Product #{{ product.pk }} details</h1>
+  <p>{{ product.name }}</p>
+  <p>{{ product.price }}</p>
+  <p>{{ product.discount }}</p>
+  <p>{{ product.description }}</p>
+  {% if product.preview %}
+    <img src="{{ product.preview.url }}" alt="{{ product.preview.name }}">
+  {% endif %}
+<h3>Images</h3>
+  {% for image in product.images.all %}
+    <div>
+      <img src="{{ image.image.url }}" alt="{{ image.image.name }}">
+      <p>
+        {{ image.description }}
+      </p>
+    </div>
+  {% empty %}
+<div>No images yet...</div>
+  {% endfor %}
+<div>
+  <a href="{% url 'shopapp:product_update' pk=product.pk  %}">Update product</a>
+</div>
+<div>
+  <a href="{% url 'shopapp:product_delete' pk=product.pk  %}">Archive product</a>
+</div>
+<div>
+  <a href="{% url 'shopapp:products_list' %}">Back to products</a>
+</div>
+{% endblock %}
