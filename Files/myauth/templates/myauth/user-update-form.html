@@ -8,21 +8,21 @@
   <h1>Update Profile</h1>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    
+
     <h3>User data</h3>
     {{ user_form.as_p }}
-    
+
     <h3>Additional info</h3>
     {{ profile_form.as_p }}
-    
+
     <button type="submit">Update</button>
-</form>
+  </form>
   {% if user.pk == modified_user.pk %}
-  <div>
-    <a href="{% url 'myauth:about-me'%}">About Me</a>
-  </div>
+    <div>
+      <a href="{% url 'myauth:about-me' %}">About Me</a>
+    </div>
   {% endif %}
   <div>
-    <a href="{% url 'myauth:users-list'%}">Users list</a>
+    <a href="{% url 'myauth:users-list' %}">Users list</a>
   </div>
 {% endblock %}
