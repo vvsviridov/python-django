@@ -127,4 +127,4 @@ ALLOWED_MIME_TYPES = ['image/jpeg', 'application/pdf']
 MEDIA_ROOT = BASE_DIR / 'uploads'
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = '/admin/'
+LOGIN_REDIRECT_URL = '/myauth/users/'

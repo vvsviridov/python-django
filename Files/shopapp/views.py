@@ -1,3 +1,4 @@
+from django.forms.models import BaseModelForm
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -5,7 +6,7 @@ from django.views import View
 from django.views.generic import (TemplateView, ListView, DetailView,
                                   CreateView, UpdateView, DeleteView)
 
-from shopapp.models import Product, Order
+from shopapp.models import Product, Order, ProductImage
 
 from .forms import ProductForm, OrderForm
 
@@ -60,27 +61,11 @@ class ProductsView(ListView):
     context_object_name = 'products'
 
 
-# class ProductsView(TemplateView):
-#     template_name = 'shopapp/products-list.html'
-    
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['products'] = Product.objects.all()
-#         return context
-
-
 class ProductsDetailsView(DetailView):
     template_name = 'shopapp/product-details.html'
     # model = Product
     queryset = Product.objects.prefetch_related('images')
     context_object_name = 'product'
-
-
-# class ProductsDetailsView(View):
-#     def get(self, request: HttpRequest, pk: int) -> HttpResponse:
-#         product = get_object_or_404(Product, pk=pk)
-#         context = {"product": product}
-#         return render(request, 'shopapp/product-details.html', context)
 
 
 class ProductCreateView(CreateView):
@@ -91,8 +76,19 @@ class ProductCreateView(CreateView):
 
 class ProductUpdateView(UpdateView):
     model = Product
-    fields = ['name', 'price', 'description', 'discount', 'preview']
+    # fields = ['name', 'price', 'description', 'discount', 'preview']
     template_name_suffix = '_update_form'
+    form_class = ProductForm
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        response = super().form_valid(form)
+        for img in self.request.FILES.getlist('images'):
+            ProductImage.objects.create(
+                product=self.object,
+                image=img,
+            )
+        return response
+
 
     def get_success_url(self):
         return reverse(
@@ -112,21 +108,6 @@ class ProductDeleteView(DeleteView):
         return HttpResponseRedirect(success_url)
 
 
-# def product_create(request: HttpRequest):
-#     if request.method == "POST":
-#         form = ProductForm(request.POST)
-#         if form.is_valid():
-#             # product_data = form.cleaned_data
-#             # Product.objects.create(**product_data)
-#             form.save()
-#             url = reverse('shopapp:products_list')
-#             return redirect(url)
-#     else:
-#         form = ProductForm()
-#     context = {"form": form}
-#     return render(request, 'shopapp/product-create.html', context)
-
-
 class OrdersView(ListView):
     queryset = (
         Order.objects
@@ -141,26 +122,6 @@ class OrderDetailsView(DetailView):
         .select_related('user')
         .prefetch_related('products')
     )
-
-
-# def orders_list(request: HttpRequest):
-#     context = {
-#         'orders': Order.objects.select_related('user').prefetch_related('products').all()
-#     }
-#     return render(request, 'shopapp/orders-list.html', context)
-
-
-# def order_create(request: HttpRequest):
-#     if request.method == "POST":
-#         form = OrderForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             url = reverse('shopapp:orders_list')
-#             return redirect(url)
-#     else:
-#         form = OrderForm()
-#     context = {"form": form}
-#     return render(request, 'shopapp/order-create.html', context)
 
 
 class OrderCreateView(CreateView):

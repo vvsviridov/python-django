@@ -1,0 +1,16 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+  Users List
+{% endblock %}
+
+{% block body %}
+  <h1>Users List</h1>
+  <ul>
+    {% for u in users %}
+        <li>
+          <a href="{% url 'myauth:user-detail' pk=u.pk %}">{{ u.username }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

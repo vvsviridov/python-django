@@ -1,14 +1,13 @@
 {% extends 'myauth/base.html' %}
 
 {% block title %}
-  Login
+  Logout
 {% endblock %}
 
 {% block body %}
-  <h1>Login</h1>
-  <form method="post">
+  <h1>Logout</h1>
+  <form action="{% url 'myauth:logout' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+    <button type="submit">Logout</button>
   </form>
 {% endblock %}
