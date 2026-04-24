@@ -6,6 +6,7 @@ from django.views import View
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema, OpenApiResponse
 
 from django.views.generic import (TemplateView, ListView, DetailView,
                                   CreateView, UpdateView, DeleteView)
@@ -16,7 +17,19 @@ from .forms import ProductForm, OrderForm
 from .serializers import ProductSerializer, OrderSerializer
 
 
+@extend_schema(description='extend_schema description')
 class ProductViewSet(ModelViewSet):
+    """
+    Набор представлений (ViewSet) для управления товарами.
+
+    Обеспечивает стандартные действия CRUD: список, создание, просмотр, 
+    обновление и удаление товаров.
+    
+    Поддерживает:
+    - Поиск по полям: название и описание.
+    - Сортировку по: названию, цене и скидке.
+    - Фильтрацию по: названию, описанию, цене, скидке и статусу архивации.
+    """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = [
@@ -34,8 +47,30 @@ class ProductViewSet(ModelViewSet):
         'archived',
     ]
 
+    @extend_schema(
+        summary='Get one product by ID',
+        description='Retrieve **products**, returns 404 if not found',
+        responses={
+            200: ProductSerializer,
+            404: OpenApiResponse(description='Empty response, product by id not found'),
+        }
+    )
+    def retrieve(self, *args, **kwargs):
+        return super().retrieve(*args, **kwargs)
+
 
 class OrderViewSet(ModelViewSet):
+    """
+    Набор представлений (ViewSet) для управления заказами.
+
+    Позволяет просматривать список заказов, создавать новые, а также 
+    редактировать или удалять существующие заказы.
+
+    Поддерживает:
+    - Поиск по полям: пользователь, адрес доставки, состав продуктов и промокод.
+    - Сортировку по: пользователю, дате создания и адресу доставки.
+    - Фильтрацию по: пользователю, адресу доставки и промокоду.
+    """
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     filter_backends = [

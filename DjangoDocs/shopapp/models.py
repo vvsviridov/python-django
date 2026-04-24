@@ -13,6 +13,11 @@ def product_preview_dir_path(instance: "Product", filename: str) -> str:
 
 
 class Product(models.Model):
+    """
+    Товары интернет-магазина
+
+    Заказы тут: :model:`shopapp.Order`
+    """
     class Meta:
         ordering = ['name']
         verbose_name = gettext_lazy('Product')
