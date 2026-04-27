@@ -23,8 +23,8 @@ class Product(models.Model):
         verbose_name = gettext_lazy('Product')
         verbose_name_plural = gettext_lazy('Products')
 
-    name = models.CharField(max_length=255)
-    description = models.TextField(null=False, blank=True)
+    name = models.CharField(max_length=255, db_index=True)
+    description = models.TextField(null=False, blank=True, db_index=True)
     price = models.DecimalField(
         default=0,
         max_digits=10,
