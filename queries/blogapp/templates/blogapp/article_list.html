@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Список статей</title>
-</head>
-<body>
-    <h1>Все статьи</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Article List</title>
+  </head>
+  <body>
+    <h1>Article List</h1>
     <ul>
-        {% for article in articles %}
-            <li>
-                <h2>{{ article.title }}</h2>
-                <p><strong>Дата публикации:</strong> {{ article.pub_date|date:"d.m.Y H:i" }}</p>
-                <p><strong>Автор:</strong> {{ article.author.name }}</p>
-                <p><strong>Категория:</strong> {{ article.category.name }}</p>
-                <p>
-                    <strong>Теги:</strong>
-                    {% for tag in article.tags.all %}
-                        {{ tag.name }}{% if not forloop.last %}, {% endif %}
-                    {% empty %}
-                        нет тегов
-                    {% endfor %}
-                </p>
-                <hr>
-            </li>
-        {% empty %}
-            <li>Статей пока нет.</li>
-        {% endfor %}
+      {% for article in articles %}
+        <li>
+          <h2>{{ article.title }}</h2>
+          <p>
+            <strong>Publishing date:</strong> {{ article.pub_date|date:'d.m.Y H:i' }}
+          </p>
+          <p>
+            <strong>Author:</strong> {{ article.author.name }}
+          </p>
+          <p>
+            <strong>Category:</strong> {{ article.category.name }}
+          </p>
+          <p>
+            <strong>Tags:</strong>
+            {% for tag in article.tags.all %}
+              {{ tag.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+              No tags
+            {% endfor %}
+          </p>
+          <hr />
+        </li>
+      {% empty %}
+        <li>No articles yet...</li>
+      {% endfor %}
     </ul>
-</body>
+  </body>
 </html>
