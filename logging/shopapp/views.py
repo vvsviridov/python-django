@@ -1,6 +1,8 @@
+import logging
+
 from django.forms.models import BaseModelForm
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
 from django.views import View
 from rest_framework.viewsets import ModelViewSet
@@ -15,6 +17,9 @@ from shopapp.models import Product, Order, ProductImage
 
 from .forms import ProductForm, OrderForm
 from .serializers import ProductSerializer, OrderSerializer
+
+
+log = logging.getLogger(__name__)
 
 
 @extend_schema(description='extend_schema description')
@@ -130,6 +135,8 @@ class ShopIndexView(View):
             ],
             'items': 1,
         }
+        log.debug('Products for shop index: %s', context['data'])
+        log.info('Rendering shop index')
         return render(request, 'shopapp/shop_index.html', context=context)
 
 
@@ -224,3 +231,22 @@ class OrderUpdateView(UpdateView):
 class OrderDeleteView(DeleteView):
     model = Order
     success_url = reverse_lazy('shopapp:orders_list')
+
+
+class ProductDataExportView(View):
+    def get(self, request: HttpRequest) -> JsonResponse:
+        products = Product.objects.order_by('pk').all()
+        products_data = [
+            {
+                'pk': p.pk,
+                'name': p.name,
+                'price': str(p.price),
+                'archived': p.archived,
+                'created_by': request.user.pk,
+            }
+            for p in products
+        ]
+        elem = products_data[0]
+        name = elem['name']
+        print('name:', name)
+        return JsonResponse({'products': products_data})

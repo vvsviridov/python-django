@@ -1,0 +1,36 @@
+2026-04-28 09:06:29,033 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-04-28 09:06:47,716 [WARNING] django.request: Not Found: /shop/products/export/
+2026-04-28 09:06:47,907 [WARNING] django.request: Not Found: /favicon.ico
+2026-04-28 09:09:08,542 [INFO] django.utils.autoreload: /home/vsviri/dev/skillbox/python-django/Logging/shopapp/urls.py changed, reloading.
+2026-04-28 09:09:09,500 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-04-28 09:09:20,973 [INFO] django.utils.autoreload: /home/vsviri/dev/skillbox/python-django/Logging/shopapp/views.py changed, reloading.
+2026-04-28 09:09:21,485 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-04-28 09:09:49,049 [INFO] django.utils.autoreload: /home/vsviri/dev/skillbox/python-django/Logging/shopapp/views.py changed, reloading.
+2026-04-28 09:09:49,517 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-04-28 09:09:58,843 [WARNING] django.request: Not Found: /shop/products/export/
+2026-04-28 09:11:02,306 [INFO] django.utils.autoreload: /home/vsviri/dev/skillbox/python-django/Logging/shopapp/urls.py changed, reloading.
+2026-04-28 09:11:03,180 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-04-28 09:13:08,821 [INFO] django.utils.autoreload: /home/vsviri/dev/skillbox/python-django/Logging/shopapp/views.py changed, reloading.
+2026-04-28 09:13:09,769 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-04-28 09:13:31,802 [INFO] django.utils.autoreload: /home/vsviri/dev/skillbox/python-django/Logging/shopapp/views.py changed, reloading.
+2026-04-28 09:13:32,325 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
+2026-04-28 09:13:36,095 [ERROR] django.request: Internal Server Error: /ru/shop/products/export/
+Traceback (most recent call last):
+  File "/home/vsviri/dev/skillbox/python-django/Logging/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vsviri/dev/skillbox/python-django/Logging/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vsviri/dev/skillbox/python-django/Logging/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vsviri/dev/skillbox/python-django/Logging/.venv/lib/python3.12/site-packages/django/views/generic/base.py", line 145, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vsviri/dev/skillbox/python-django/Logging/shopapp/views.py", line 250, in get
+    name = elem['naem']
+           ~~~~^^^^^^^^
+KeyError: 'naem'
+2026-04-28 09:17:28,730 [INFO] django.utils.autoreload: /home/vsviri/dev/skillbox/python-django/Logging/shopapp/views.py changed, reloading.
+2026-04-28 09:17:29,797 [INFO] django.utils.autoreload: Watching for file changes with StatReloader
