@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Article List</title>
+  </head>
+  <body>
+    <h1>Article List</h1>
+    <ul>
+      {% for article in articles %}
+        <li>
+          <h2>{{ article.title }}</h2>
+          <p>
+            <strong>Publishing date:</strong> {{ article.pub_date|date:'d.m.Y H:i' }}
+          </p>
+          <p>
+            <strong>Author:</strong> {{ article.author.name }}
+          </p>
+          <p>
+            <strong>Category:</strong> {{ article.category.name }}
+          </p>
+          <p>
+            <strong>Tags:</strong>
+            {% for tag in article.tags.all %}
+              {{ tag.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+              No tags
+            {% endfor %}
+          </p>
+          <hr />
+        </li>
+      {% empty %}
+        <li>No articles yet...</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
