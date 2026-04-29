@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block body %}
-
   <h2>{{ article.title }}</h2>
   <p>
     <strong>Publishing date:</strong> {{ article.pub_date|date:'d.m.Y H:i' }}
@@ -16,9 +15,7 @@
   <p>
     <strong>Category:</strong> {{ article.category.name }}
   </p>
-  <p>
-    {{ article.content }}
-  </p>
+  <p>{{ article.content }}</p>
   <p>
     <strong>Tags:</strong>
     {% for tag in article.tags.all %}
@@ -28,5 +25,4 @@
     {% endfor %}
   </p>
   <a href="{% url 'blogapp:articles' %}">Back to articles</a>
-
 {% endblock %}
