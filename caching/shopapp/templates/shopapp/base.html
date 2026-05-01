@@ -1,0 +1,27 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Base Title
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <header>
+      <a href="{% url 'shopapp:index' %}">{% translate 'Home' %}</a>
+      <a href="{% url 'shopapp:products_list' %}">{% translate 'Products' %}</a>
+      <a href="{% url 'shopapp:orders_list' %}">{% translate 'Orders' %}</a>
+    </header>
+    {% block body %}
+      Base Body
+    {% endblock %}
+    <br>
+    <div>
+      {% translate 'Today is' %} {% now 'l Y-m-d H:i:s' %}
+    </div>
+  </body>
+</html>
