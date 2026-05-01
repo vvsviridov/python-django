@@ -1,13 +1,19 @@
+import logging
+
 from django.contrib import admin
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.urls import path
 from django.shortcuts import render, redirect
+from django.core.exceptions import ValidationError
 
 from .models import Product, Order, ProductImage
 from .admin_mixins import ExportAsCSVMixin
 from .forms import CSVImportForm
 from .utils import save_csv_products, save_csv_orders
+
+
+logger = logging.getLogger(__name__)
 
 
 @admin.action(description='Archive products')
@@ -90,7 +96,14 @@ class ProductAdmin(admin.ModelAdmin, ExportAsCSVMixin):
                 'form': form,
             }
             return render(request, 'admin/csv_form.html', context, status=400)
-        save_csv_products(form.files['csv_file'].file, request.encoding)
+        try:
+            imported_count = len(save_csv_products(form.files['csv_file'].file, request.encoding))
+            self.message_user(request, f"Imported {imported_count} records")
+        except ValidationError as e:
+            self.message_user(request, f"Validation error: {e}")
+        except Exception as e:
+            self.message_user(request, "Import error")
+            logger.error(f"Import error: {e}")
         self.message_user(request, 'Data from CSV has been imported')
         return redirect('..')
     
@@ -111,7 +124,7 @@ class ProductAdmin(admin.ModelAdmin, ExportAsCSVMixin):
         return obj.description[:48] + '...'
 
 
-class ProductInLine(admin.TabularInline):
+class ProductTabInLine(admin.TabularInline):
     model = Order.products.through
 
 
@@ -120,7 +133,7 @@ class OrderAdmin(admin.ModelAdmin):
     change_list_template = 'shopapp/orders_changelist.html'
 
     inlines = [
-        ProductInLine,
+        ProductTabInLine,
     ]
     list_display = 'pk', 'delivery_address', 'promocode', 'created_at', 'user_verbose'
 
@@ -143,7 +156,14 @@ class OrderAdmin(admin.ModelAdmin):
                 'form': form,
             }
             return render(request, 'admin/csv_form.html', context, status=400)
-        save_csv_orders(form.files['csv_file'].file, request.encoding)
+        try:
+            imported_count = len(save_csv_orders(form.files['csv_file'].file, request.encoding))
+            self.message_user(request, f"Imported {imported_count} records")
+        except ValidationError as e:
+            self.message_user(request, f"Validation error: {e}")
+        except Exception as e:
+            self.message_user(request, "Import error")
+            logger.error(f"Import error: {e}")
         self.message_user(request, 'Data from CSV has been imported')
         return redirect('..')
     

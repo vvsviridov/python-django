@@ -1,5 +1,8 @@
 from django import forms
 
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
+
 from .models import Product, Order
 
 
@@ -37,4 +40,15 @@ class OrderForm(forms.ModelForm):
 
 
 class CSVImportForm(forms.Form):
-    csv_file = forms.FileField()
+    csv_file = forms.FileField(
+        validators=[
+            FileExtensionValidator(allowed_extensions=['csv']),
+            validate_file_size
+        ]
+    )
+
+
+def validate_file_size(file):
+    maxSize = 5 * 1024 * 1024  # 5MB
+    if file.size > maxSize:
+        raise ValidationError('File too big')
