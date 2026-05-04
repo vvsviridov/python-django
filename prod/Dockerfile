@@ -10,8 +10,8 @@ COPY prod/pyproject.toml prod/uv.lock ./
 
 RUN uv sync --frozen --no-cache --no-install-project
 
-COPY prod .
+COPY prod . myfristsite
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-CMD ["gunicorn", "myfirstsite.wsgi.application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "myfristsite.wsgi.application", "--bind", "0.0.0.0:8000"]
