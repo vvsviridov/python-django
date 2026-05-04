@@ -4,7 +4,7 @@ services:
     build:
       dockerfile: ./Dockerfile
     command:
-      - "gnucorn"
+      - "gunicorn"
       - "myfirstsite.wsgi.application"
       - "--bind"
       - "0.0.0.0:8000"

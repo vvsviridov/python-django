@@ -14,4 +14,4 @@ COPY prod .
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-CMD ["gnucorn", "myfirstsite.wsgi.application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "myfirstsite.wsgi.application", "--bind", "0.0.0.0:8000"]
