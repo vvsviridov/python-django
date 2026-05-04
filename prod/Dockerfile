@@ -10,8 +10,8 @@ COPY pyproject.toml uv.lock ./
 
 RUN uv sync --frozen --no-cache --no-install-project
 
-COPY . .
+COPY prod .
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gnucorn", "myfirstsite.wsgi.application", "--bind", "0.0.0.0:8000"]
