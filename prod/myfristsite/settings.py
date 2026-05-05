@@ -43,6 +43,13 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+RAILWAY_PUBLIC_DOMAIN = os.getenv("RAILWAY_PUBLIC_DOMAIN")
+
+if RAILWAY_PUBLIC_DOMAIN:
+    CSRF_TRUSTED_ORIGINS = [
+        f"https://{RAILWAY_PUBLIC_DOMAIN}",
+    ]
+
 if DEBUG:
     import socket
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
