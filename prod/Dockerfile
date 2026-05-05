@@ -12,6 +12,8 @@ RUN uv sync --frozen --no-cache --no-install-project
 
 COPY prod .
 
+RUN python manage.py collectstatic --noinput
+
 ENV PATH="/app/.venv/bin:$PATH"
 
 CMD ["gunicorn", "myfristsite.wsgi:application", "--bind", "0.0.0.0:8000"]

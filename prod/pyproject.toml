@@ -15,4 +15,5 @@ dependencies = [
     "flake8-docstrings>=1.7.0",
     "gunicorn>=25.3.0",
     "pillow>=12.2.0",
+    "whitenoise>=6.12.0",
 ]
